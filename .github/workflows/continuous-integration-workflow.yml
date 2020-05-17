@@ -1,6 +1,9 @@
-name: Greet Everyone
-# This workflow is triggered on pushes to the repository.
-on: [push]
+name: Android Master
+# This workflow is triggered on pushes to the repository master branch.
+on:
+  push:
+    branches:
+      - 'master'
 
 jobs:
   build:
@@ -18,4 +21,27 @@ jobs:
       # This step prints an output (time) from the previous step's action.
       - name: Echo the greeting's time
         run: echo 'The time was ${{ steps.hello.outputs.time }}.'
+
+    
+
+  apk:
+    name: Generate APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Assemble app debug APK
+        run: bash ./gradlew assembleDebug --stacktrace
+        env:
+          ZTM_API_KEY: ${{ secrets.ZTM_API_KEY }}
+      - name: Upload app APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
 
