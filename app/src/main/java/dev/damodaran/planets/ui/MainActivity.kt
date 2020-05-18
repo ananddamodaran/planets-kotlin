@@ -1,8 +1,11 @@
-package dev.damodaran.planets
+package dev.damodaran.planets.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import dev.damodaran.planets.*
+import dev.damodaran.planets.api.PlanetsApiService
+import dev.damodaran.planets.api.Response
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Timber.tag("Planets: MainActivity")
+        Timber.tag("Planets:")
 
         recyclerView.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this)
@@ -22,38 +25,27 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = layoutManager
 
-
-
-
-        val endpoint = "https://raw.githubusercontent.com/"
         val retrofit = Retrofit.Builder()
-                .baseUrl(endpoint)
-                .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(ENDPOINT)
+            .addConverterFactory(GsonConverterFactory.create())
 
-                .build()
+            .build()
 
         val api = retrofit.create(PlanetsApiService::class.java)
-        val response = api.getPlanets().enqueue(object : Callback<Response>{
+        api.getPlanets().enqueue(object : Callback<Response> {
             override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
                 Timber.d("onResponse")
-                if(response.isSuccessful){
-                   Timber.d(response.body()?.planets?.size.toString())
-                    val list = response.body()?.planets?: emptyList()
-                    recyclerView.adapter = PlanetsAdapter(list)
+                if (response.isSuccessful) {
+                    Timber.d(response.body()?.planets?.size.toString())
+                    val list = response.body()?.planets ?: emptyList()
+                    recyclerView.adapter =
+                        PlanetsAdapter(list)
                 }
             }
 
             override fun onFailure(call: Call<Response>, t: Throwable) {
-               Timber.d("onFailure ${t.localizedMessage}")
-
-
+                Timber.d("onFailure ${t.localizedMessage}")
             }
-        }
-
-        )
-
-
-
-
+        })
     }
 }

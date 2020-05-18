@@ -1,4 +1,4 @@
-package dev.damodaran.planets
+package dev.damodaran.planets.api
 
 data class Planet(
     val order: Int,

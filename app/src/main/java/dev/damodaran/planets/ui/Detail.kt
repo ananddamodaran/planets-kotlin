@@ -1,8 +1,9 @@
-package dev.damodaran.planets
+package dev.damodaran.planets.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
+import dev.damodaran.planets.R
 import kotlinx.android.synthetic.main.planet_detail.*
 
 class Detail : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package dev.damodaran.planets
+package dev.damodaran.planets.ui
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,22 +8,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import timber.log.Timber
+import dev.damodaran.planets.R
+import dev.damodaran.planets.api.Planet
 
 class PlanetsAdapter(private val list:List<Planet>) : RecyclerView.Adapter<PlanetsAdapter.ViewHolder>() {
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) , View.OnClickListener{
+    class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val title: TextView = view.findViewById(R.id.title)
         val summary: TextView = view.findViewById(R.id.summary)
         val thumbnail: ImageView = view.findViewById(R.id.thumbnail)
-        override fun onClick(view: View?) {
-
-        }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
        val view=  LayoutInflater.from(parent.context).inflate(
-            R.layout.item_planet,parent,false)
+           R.layout.item_planet,parent,false)
         return ViewHolder(view)
     }
 
@@ -35,12 +32,11 @@ class PlanetsAdapter(private val list:List<Planet>) : RecyclerView.Adapter<Plane
         holder.title.text = planet.name.toUpperCase()
         holder.summary.text = planet.description
         holder.itemView.setOnClickListener {
-            val detail = Intent(context,Detail::class.java)
+            val detail = Intent(context, Detail::class.java)
             detail.putExtra("summary", planet.description)
             detail.putExtra("image", planet.image)
             context.startActivity(detail)
         }
-
         Glide.with(context)
             .load(planet.image)
             .centerCrop()
