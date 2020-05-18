@@ -1,4 +1,4 @@
 ## Planets-Kotlin
 
 
-![](https://github.com/ananddamodaran/planets-kotlin/workflows/Greet%20Everyone/badge.svg)
+![](https://github.com/ananddamodaran/planets-kotlin/workflows/Planets-Kotlin/badge.svg)

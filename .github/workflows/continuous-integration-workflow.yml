@@ -1,4 +1,4 @@
-name: Android Master
+name: Planets-Kotlin
 # This workflow is triggered on pushes to the repository master branch.
 on:
   push:
