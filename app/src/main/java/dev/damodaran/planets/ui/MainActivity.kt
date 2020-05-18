@@ -19,33 +19,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Timber.tag("Planets:")
 
-        recyclerView.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
 
-        recyclerView.layoutManager = layoutManager
+        fragmentTransaction.add(R.id.fragmentContainer,PlanetListFragment())
+        fragmentTransaction.commit()
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl(ENDPOINT)
-            .addConverterFactory(GsonConverterFactory.create())
-
-            .build()
-
-        val api = retrofit.create(PlanetsApiService::class.java)
-        api.getPlanets().enqueue(object : Callback<Response> {
-            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
-                Timber.d("onResponse")
-                if (response.isSuccessful) {
-                    Timber.d(response.body()?.planets?.size.toString())
-                    val list = response.body()?.planets ?: emptyList()
-                    recyclerView.adapter =
-                        PlanetsAdapter(list)
-                }
-            }
-
-            override fun onFailure(call: Call<Response>, t: Throwable) {
-                Timber.d("onFailure ${t.localizedMessage}")
-            }
-        })
     }
 }
