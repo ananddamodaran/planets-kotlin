@@ -1,6 +1,5 @@
 package dev.damodaran.planets.ui
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,12 @@ import com.bumptech.glide.Glide
 import dev.damodaran.planets.R
 import dev.damodaran.planets.api.Planet
 
-class PlanetsAdapter(private val list:List<Planet>) : RecyclerView.Adapter<PlanetsAdapter.ViewHolder>() {
+class PlanetsAdapter(private val list:List<Planet>, listener:OnPlanetSelectedListener) : RecyclerView.Adapter<PlanetsAdapter.ViewHolder>() {
+    var planetClickListener : OnPlanetSelectedListener = listener
+
+    interface OnPlanetSelectedListener {
+        fun onPlanetSelected(summary: String,thumbnail:String)
+    }
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val title: TextView = view.findViewById(R.id.title)
@@ -26,16 +30,15 @@ class PlanetsAdapter(private val list:List<Planet>) : RecyclerView.Adapter<Plane
 
     override fun getItemCount(): Int = list.size
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val context=holder.itemView.context
        val planet = list[position];
         holder.title.text = planet.name.toUpperCase()
         holder.summary.text = planet.description
         holder.itemView.setOnClickListener {
-            val detail = Intent(context, Detail::class.java)
-            detail.putExtra("summary", planet.description)
-            detail.putExtra("image", planet.image)
-            context.startActivity(detail)
+            planetClickListener.onPlanetSelected(planet.description,
+            planet.image)
         }
         Glide.with(context)
             .load(planet.image)
