@@ -7,4 +7,4 @@ Libraries:
   - Kotlin
   - Glide
 
-![](https://github.com/ananddamodaran/planets-kotlin/workflows/Planets-Kotlin/badge.svg)
+![](https://github.com/ananddamodaran/planets-kotlin/workflows/CI/badge.svg)
