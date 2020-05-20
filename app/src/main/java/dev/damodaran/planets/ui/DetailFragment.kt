@@ -4,35 +4,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import dev.damodaran.planets.R
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.planet_detail.*
+import dev.damodaran.planets.databinding.PlanetDetailBinding
+
+const val SUMMARY = "summary"
+const val IMAGE = "image"
 
 class DetailFragment : Fragment() {
 
+    lateinit var  binding: PlanetDetailBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return layoutInflater.inflate(R.layout.planet_detail,container,false)
+        binding = PlanetDetailBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val img = arguments?.getString("image")
-        val summaryVal = arguments?.getString("summary")
-
-        Glide.with(this)
-            .load(img)
-            .centerCrop()
-            .into(image)
-
-        summary.text = summaryVal
+        val thumbnail =  arguments?.getString(IMAGE)
+        binding.apply {
+            description = arguments?.getString(SUMMARY)
+            Glide.with(this@DetailFragment)
+                .load(thumbnail)
+                .centerCrop()
+                .into(image)
+        }
     }
 
 }
