@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
     <data>
         <variable
             name="description"
@@ -11,14 +13,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.MainActivity">
+        tools:context="dev.damodaran.planets.ui.DetailFragment">
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="250dp"
-            android:background="#FAB297"
+            android:minHeight="@dimen/image_min_ht"
+            android:background="@color/app_bg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,17 +30,17 @@
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/image"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="#FAB297">
+            android:background="@color/app_bg">
 
             <TextView
                 android:id="@+id/summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="@string/summary"
-                android:textSize="18sp"
-                android:padding="16dp"
+                android:textSize="@dimen/summary_txt_size"
+                android:padding="@dimen/summary_padding"
                 android:text="@{description}"
-                android:lineSpacingExtra="5pt"
+                android:lineSpacingExtra="@dimen/summary_txt_linespace"
 
                 />
         </ScrollView>

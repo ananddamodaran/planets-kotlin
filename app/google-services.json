@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "645714945279",
+    "firebase_url": "https://anand-damodaran-dev.firebaseio.com",
+    "project_id": "anand-damodaran-dev",
+    "storage_bucket": "anand-damodaran-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645714945279:android:694cba8ad5521c5d6198ca",
+        "android_client_info": {
+          "package_name": "dev.damodaran.planets.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645714945279-1sqjqbd36f4qb5gil01erru8ldjrlo5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVVCz5T7ptnaAYBCEpoYhPA1zZl6s_yhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "645714945279-1sqjqbd36f4qb5gil01erru8ldjrlo5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,7 +8,9 @@ import dev.damodaran.planets.R
 import dev.damodaran.planets.api.Planet
 import dev.damodaran.planets.databinding.ItemPlanetBinding
 
-class PlanetsAdapter(private val list:List<Planet>, listener: PlanetListFragment.OnPlanetSelectedListener) : RecyclerView.Adapter<PlanetsAdapter.ViewHolder>() {
+class PlanetsAdapter(private val list:List<Planet>,
+                     listener: PlanetListFragment.OnPlanetSelectedListener)
+    : RecyclerView.Adapter<PlanetsAdapter.ViewHolder>() {
     private var planetClickListener : PlanetListFragment.OnPlanetSelectedListener = listener
 
     class ViewHolder(val binding: ItemPlanetBinding): RecyclerView.ViewHolder(binding.root){

@@ -13,30 +13,26 @@ import dev.damodaran.planets.databinding.PlanetDetailBinding
 const val SUMMARY = "summary"
 const val IMAGE = "image"
 
-class DetailFragment : Fragment() {
+class DetailFragment : Fragment(R.layout.planet_detail) {
 
-    private var binding: PlanetDetailBinding? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-         binding = DataBindingUtil.inflate(inflater,
-             R.layout.planet_detail,
-             container,false)
-        return binding?.root
+    private lateinit var binding: PlanetDetailBinding
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = PlanetDetailBinding.bind(view)
+
     }
-
     override fun onStart() {
         super.onStart()
         val thumbnail =  arguments?.getString(IMAGE)
         val summary = arguments?.getString(SUMMARY)
-        updateView(summary,thumbnail)
 
+        updateView(summary,thumbnail)
     }
-    fun updateView(summary: String?, thumbnail: String?) {
-        binding?.apply {
+
+    fun updateView(summary:String?, thumbnail:String?){
+        binding.apply {
             description = summary
             Glide.with(this@DetailFragment)
                 .load(thumbnail)

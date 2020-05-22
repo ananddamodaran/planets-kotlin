@@ -5,6 +5,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
@@ -15,16 +16,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/planetDetail"
+            app:layout_constraintEnd_toStartOf="@+id/planetDetailContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-        <fragment
-            android:id="@+id/planetDetail"
-            android:name="dev.damodaran.planets.ui.DetailFragment"
+        <FrameLayout
+            android:id="@+id/planetDetailContainer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:background="@color/app_bg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/planetList"

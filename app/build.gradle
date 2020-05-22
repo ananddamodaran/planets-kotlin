@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
 
 
 android {
@@ -14,14 +17,18 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            applicationIdSuffix ".debug"
+
         }
     }
     compileOptions {
@@ -47,7 +54,11 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_gson_version"
     implementation "com.jakewharton.timber:timber:$timber_version"
     implementation "com.github.bumptech.glide:glide:$glide_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "com.github.bumptech.glide:compiler:$glide_compiler_version"
+    implementation "com.google.firebase:firebase-analytics:$firebase_analytics_version"
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0'
+
 
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$extJunit_version"
