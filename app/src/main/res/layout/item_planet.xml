@@ -11,6 +11,9 @@
         <variable
             name="description"
             type="String" />
+        <variable
+            name="thumbnailImage"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -67,10 +70,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
-            />
-
-
+            app:imageFromUrl="@{thumbnailImage}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

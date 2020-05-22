@@ -1,5 +1,6 @@
 package dev.damodaran.planets.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 
 
-class PlanetListFragment (val listener : PlanetsAdapter.OnPlanetSelectedListener) : Fragment(){
+class PlanetListFragment : Fragment(){
+    lateinit var  listener : OnPlanetSelectedListener
+    interface OnPlanetSelectedListener {
+        fun onPlanetSelected(summary: String,thumbnail:String)
+    }
+
     private lateinit var api: PlanetsApiService
     private lateinit var binding : FragmentPlanetListBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +49,10 @@ class PlanetListFragment (val listener : PlanetsAdapter.OnPlanetSelectedListener
 
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as  OnPlanetSelectedListener
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,10 +65,6 @@ class PlanetListFragment (val listener : PlanetsAdapter.OnPlanetSelectedListener
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.recyclerView.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(context)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-        binding.recyclerView.layoutManager = layoutManager
         api.getPlanets().enqueue(object : Callback<Response> {
             override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
                 Timber.d("onResponse")
