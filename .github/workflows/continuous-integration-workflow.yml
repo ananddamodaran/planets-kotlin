@@ -18,6 +18,16 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
+      - name: Cache Gradle and wrapper
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle- 
+
       - name: Assemble app debug APK
         run: bash ./gradlew :app:assembleDebug --stacktrace
         
